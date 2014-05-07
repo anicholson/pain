@@ -14,9 +14,9 @@ def get_color(value)
   offset = case value
            when :trivial
              40
-	   when :minor
+           when :minor
              69
-	   when :standard
+           when :standard
              184
            when :major
              202
@@ -24,7 +24,7 @@ def get_color(value)
              9
            else
              252
-	   end
+     end
   Term::ANSIColor::Attribute[offset]
 end
 
@@ -37,7 +37,7 @@ def case_danger(danger)
     :standard
   elsif danger < 0.81
     :major
-  else 
+  else
     :critical
   end
 end
@@ -59,11 +59,11 @@ end
 def color_output(msg, danger = :normal)
   level = if danger == :normal
             :default
-	  elsif danger.is_a? Symbol
-	    danger
-	  else
+    elsif danger.is_a? Symbol
+      danger
+    else
             case_danger(danger)
-	  end
+    end
   puts msg.color(get_color(level))
 end
 
@@ -99,17 +99,17 @@ options = {}
 
 OptionParser.new do |opts|
   opts.on('-l', '--likelihood [LIKELIHOOD]', OptionParser::DecimalInteger,
-	  'How likely is this bug to occur?') do |like|
+    'How likely is this bug to occur?') do |like|
     options[:likelihood] = Pain::normalize(like, :likelihood)
   end
 
   opts.on('-i', '--impact [IMPACT]', OptionParser::DecimalInteger,
-	  'How much impact will this bug have?') do |impact|
+    'How much impact will this bug have?') do |impact|
     options[:impact] = Pain.normalize(impact, :impact)
   end
 
   opts.on('-t', '--type [TYPE]', OptionParser::DecimalInteger,
-	  'What kind of bug is this?') do |bug_type|
+    'What kind of bug is this?') do |bug_type|
     options[:bug_type] = Pain.normalize(bug_type, :bug_type)
   end
 end.parse!

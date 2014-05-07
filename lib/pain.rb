@@ -27,7 +27,7 @@ module Pain
     },
     likelihood: {
       1 => 'Will affect almost no one',
-      2 => 'Will only affect a few users', 
+      2 => 'Will only affect a few users',
       3 => 'Will affect average number of users',
       4 => 'Will affect most users',
       5 => 'Will affect all users'
