@@ -1,18 +1,8 @@
 require 'spec_helper'
 
-module UserPain
-  MAX_BUG_TYPE   = 7
-  MAX_LIKELIHOOD = 5
-  MAX_IMPACT     = 5
-  MAX_PAIN       = 5 * 5 * 7
 
-  def user_pain(type, likelihood, impact)
-    100 * (type * likelihood * impact) / MAX_PAIN
-  end
-end
-
-describe 'user_pain' do
-  subject { Class.new { include UserPain }.new }
+describe 'pain' do
+  subject { Class.new { include Pain }.new }
 
   it 'calculates_correctly' do
     expect(subject.user_pain(7, 5, 5)).to eq(100)
