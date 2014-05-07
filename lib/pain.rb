@@ -38,7 +38,7 @@ module Pain
       2 => 'A Pain: Users won\'t like this once they notice it.',
       3 => 'Affects Buy-in. Will show up in review. Clearly noticeable.',
       4 => 'A user would return the product. Should not deploy until fixed',
-      5 => 'Cannot build the system'
+      5 => 'Affects system build'
     }
   }
 
