@@ -87,9 +87,9 @@ def print_report_for(o)
     hash
   end
 
-  color_output "Type:       #{o[:bug_type]} - #{Pain::OPTIONS[:bug_type][o[:bug_type]]}", levels[:bug_type]
+  color_output "Type:       #{o[:bug_type]} - #{Pain::OPTIONS[:bug_type][o[:bug_type]]}"      , levels[:bug_type]
   color_output "Likelihood: #{o[:likelihood]} - #{Pain::OPTIONS[:likelihood][o[:likelihood]]}", levels[:likelihood]
-  color_output "Impact:     #{o[:impact]} - #{Pain::OPTIONS[:impact][o[:impact]]}", levels[:impact]
+  color_output "Impact:     #{o[:impact]} - #{Pain::OPTIONS[:impact][o[:impact]]}"            , levels[:impact]
   puts
   color_output "User Pain: #{pain}", total_danger(pain)
 end
@@ -97,18 +97,30 @@ end
 options = {}
 
 OptionParser.new do |opts|
-  opts.on('-l', '--likelihood [LIKELIHOOD]', OptionParser::DecimalInteger,
-    Pain::INPUT_MESSAGE[:likelihood]) do |like|
+  opts.on(
+    '-l',
+    '--likelihood [LIKELIHOOD]',
+    OptionParser::DecimalInteger,
+    Pain::INPUT_MESSAGE[:likelihood]
+  ) do |like|
     options[:likelihood] = Pain.normalize(like, :likelihood)
   end
 
-  opts.on('-i', '--impact [IMPACT]', OptionParser::DecimalInteger,
-    Pain::INPUT_MESSAGE[:impact]) do |impact|
+  opts.on(
+    '-i',
+    '--impact [IMPACT]',
+    OptionParser::DecimalInteger,
+    Pain::INPUT_MESSAGE[:impact]
+  ) do |impact|
     options[:impact] = Pain.normalize(impact, :impact)
   end
 
-  opts.on('-t', '--type [TYPE]', OptionParser::DecimalInteger,
-    Pain::INPUT_MESSAGE[:bug_type]) do |bug_type|
+  opts.on(
+    '-t',
+    '--type [TYPE]',
+    OptionParser::DecimalInteger,
+    Pain::INPUT_MESSAGE[:bug_type]
+  ) do |bug_type|
     options[:bug_type] = Pain.normalize(bug_type, :bug_type)
   end
 end.parse!

@@ -5,3 +5,6 @@ AllCops:
 
 Documentation:
   Enabled: false
+
+MethodLength:
+  Max: 15
