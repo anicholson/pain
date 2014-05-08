@@ -3,6 +3,8 @@
 Quickly gauge the User Pain a bug will cause.
 Basically stolen from http://www.lostgarden.com/2008/05/improving-bug-triage-with-user-pain.html
 
+[![Code Climate](https://codeclimate.com/github/anicholson/pain.png)](https://codeclimate.com/github/anicholson/pain)
+
 ## Installation
 
 Install it yourself as:
