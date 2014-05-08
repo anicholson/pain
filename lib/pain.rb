@@ -34,7 +34,7 @@ module Pain
     },
 
     impact: {
-      1 => 'Nuisance: not a big deal bug noticeable.',
+      1 => 'Nuisance: not a big deal but noticeable.',
       2 => 'A Pain: Users won\'t like this once they notice it.',
       3 => 'Affects Buy-in. Will show up in review. Clearly noticeable.',
       4 => 'A user would return the product. Should not deploy until fixed',
