@@ -14,16 +14,16 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
-  spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
+  spec.executables   = spec.files.grep(%r{^bin/pain}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
   spec.add_dependency 'term-ansicolor'
   spec.add_dependency 'tins'
 
-  spec.add_development_dependency 'bundler', '~> 1.6'
+  spec.add_development_dependency 'bundler', '~> 2'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rspec', '< 4'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'simplecov-rcov'
   spec.add_development_dependency 'pry'
