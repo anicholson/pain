@@ -1,7 +1,8 @@
 AllCops:
   Exclude:
-  - spec/**
-  - pain.gemspec
+    - spec/**
+    - pain.gemspec
+  NewCops: enable
 
 Documentation:
   Enabled: false
