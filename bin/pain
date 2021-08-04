@@ -83,9 +83,8 @@ end
 def print_report_for(o)
   pain = Pain.user_pain(o[:bug_type], o[:likelihood], o[:impact])
 
-  levels = o.reduce({}) do |hash, (input, level)|
+  levels = o.each_with_object({}) do |(input, level), hash|
     hash[input] = case_danger(level.to_f / Pain::MAX[input])
-    hash
   end
 
   color_output "Type:       #{o[:bug_type]} - #{Pain::OPTIONS[:bug_type][o[:bug_type]]}", levels[:bug_type]
@@ -126,7 +125,7 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-[:bug_type, :likelihood, :impact].each do |input|
+%i[bug_type likelihood impact].each do |input|
   first = true
   until options[input]
     ask_question_for input

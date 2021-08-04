@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'pain/version'
 require 'optparse'
 require 'ostruct'
