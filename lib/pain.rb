@@ -3,16 +3,16 @@ require 'optparse'
 require 'ostruct'
 
 module Pain
-  MAX  = {
-    bug_type:   7,
+  MAX = {
+    bug_type: 7,
     likelihood: 5,
-    impact:     5
+    impact: 5
   }
 
-  INPUT_MESSAGE  = {
-    bug_type:   'What kind of bug is this?',
+  INPUT_MESSAGE = {
+    bug_type: 'What kind of bug is this?',
     likelihood: 'How likely is this bug to occur?',
-    impact:     'How much impact will this bug have?'
+    impact: 'How much impact will this bug have?'
   }
 
   OPTIONS = {
@@ -57,6 +57,7 @@ module Pain
     return nil if max.nil? || value.nil?
     return nil if value < 1
     return max if value > max
+
     value
   end
 end

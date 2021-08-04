@@ -83,13 +83,13 @@ def print_report_for(o)
   pain = Pain.user_pain(o[:bug_type], o[:likelihood], o[:impact])
 
   levels = o.reduce({}) do |hash, (input, level)|
-    hash[input] = case_danger(level.to_f /  Pain::MAX[input])
+    hash[input] = case_danger(level.to_f / Pain::MAX[input])
     hash
   end
 
-  color_output "Type:       #{o[:bug_type]} - #{Pain::OPTIONS[:bug_type][o[:bug_type]]}"      , levels[:bug_type]
+  color_output "Type:       #{o[:bug_type]} - #{Pain::OPTIONS[:bug_type][o[:bug_type]]}", levels[:bug_type]
   color_output "Likelihood: #{o[:likelihood]} - #{Pain::OPTIONS[:likelihood][o[:likelihood]]}", levels[:likelihood]
-  color_output "Impact:     #{o[:impact]} - #{Pain::OPTIONS[:impact][o[:impact]]}"            , levels[:impact]
+  color_output "Impact:     #{o[:impact]} - #{Pain::OPTIONS[:impact][o[:impact]]}", levels[:impact]
   puts
   color_output "User Pain: #{pain}", total_danger(pain)
 end
