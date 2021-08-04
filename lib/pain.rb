@@ -9,13 +9,13 @@ module Pain
     bug_type: 7,
     likelihood: 5,
     impact: 5
-  }
+  }.freeze
 
   INPUT_MESSAGE = {
     bug_type: 'What kind of bug is this?',
     likelihood: 'How likely is this bug to occur?',
     impact: 'How much impact will this bug have?'
-  }
+  }.freeze
 
   OPTIONS = {
     bug_type: {
@@ -42,7 +42,7 @@ module Pain
       4 => 'A user would return the product. Should not deploy until fixed',
       5 => 'Affects system build'
     }
-  }
+  }.freeze
 
   def max_pain
     MAX.values.reduce(&:*)
