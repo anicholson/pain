@@ -9,23 +9,13 @@ module Pain
     def initialize
       @options = {}
       @model = Pain::Model.new
-      define_options
+      @option_parser = Options.create(@options, @model)
     end
 
     def run!
       @option_parser.parse!
 
-      %i[bug_type likelihood impact].each do |input|
-        first = true
-        until options[input]
-          ask_question_for input
-          display_choices_for(input) if first
-
-          response       = gets.chomp
-          options[input] = model.normalize(response, input)
-          first          = false
-        end
-      end
+      %i[bug_type likelihood impact].each { |input| fill_question(input) }
 
       puts
       print_report_for options
@@ -34,6 +24,18 @@ module Pain
     private
 
     attr_reader :model, :options, :option_parser
+
+    def fill_question(input, first: true)
+      return unless options[input].nil?
+
+      ask_question_for input
+      display_choices_for(input) if first
+
+      response       = gets.chomp
+      options[input] = model.normalize(response, input)
+
+      fill_question(input, first: false) if options[input].nil?
+    end
 
     def get_color(value)
       offset = case value
@@ -106,6 +108,7 @@ module Pain
       color_output model.input_message(input)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def print_report_for(scores)
       pain = model.user_pain(scores[:bug_type], scores[:likelihood], scores[:impact])
 
@@ -121,16 +124,20 @@ module Pain
       puts
       color_output "User Pain: #{pain}", total_danger(pain)
     end
+    # rubocop:enable Metrics/AbcSize
+  end
 
-    def define_options
-      @option_parser = OptionParser.new do |opts|
+  # rubocop:disable Metrics/MethodLength
+  class Options
+    def self.create(options, model)
+      OptionParser.new do |opts|
         opts.on(
           '-l',
           '--likelihood [LIKELIHOOD]',
           OptionParser::DecimalInteger,
           model.input_message(:likelihood)
         ) do |like|
-          @options[:likelihood] = model.normalize(like, :likelihood)
+          options[:likelihood] = model.normalize(like, :likelihood)
         end
 
         opts.on(
@@ -139,7 +146,7 @@ module Pain
           OptionParser::DecimalInteger,
           model.input_message(:impact)
         ) do |impact|
-          @options[:impact] = model.normalize(impact, :impact)
+          options[:impact] = model.normalize(impact, :impact)
         end
 
         opts.on(
@@ -148,9 +155,10 @@ module Pain
           OptionParser::DecimalInteger,
           model.input_message(:bug_type)
         ) do |bug_type|
-          @options[:bug_type] = model.normalize(bug_type, :bug_type)
+          options[:bug_type] = model.normalize(bug_type, :bug_type)
         end
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 end
